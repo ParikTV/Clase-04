@@ -72,7 +72,7 @@ class ProductosController{
 
 
             
-            await repoProducto.create(product);
+            await repoProducto.save(product);
 
         } catch (error) {
             return res.status(400).json({message:"Error al guardar"})
