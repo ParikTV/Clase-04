@@ -72,7 +72,7 @@ class ProductosController{
 
 
             
-            repoProducto.create(producto);
+            await repoProducto.create(product);
 
         } catch (error) {
             
