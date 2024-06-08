@@ -52,13 +52,28 @@ class ProductosController{
 
             //reglas de negocio
             //validar si el producto ya existe
-                const product= await repoProducto.findOne({where:{id}});
+                let product= await repoProducto.findOne({where:{id}});
                 if(product){
                     return res.status(400).json({message:"Ese producto ya se encuentra registrado en la base de datos "})
                 }
+                if(stock<=0){
+                    return res.status(400).json({message:"El stock debe ser mayor o igual a 0 "})
+                }
                 
+            product= new Productos;
+
+            product.id= id;
+            product.nombre;
+            product.precio=precio;
+            product.categoria=categoria;
+            product.stock=stock;
+            product.estado=true;
+
+
+
             
-            
+            repoProducto.create(producto);
+
         } catch (error) {
             
         }
