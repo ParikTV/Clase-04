@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, response } from "express";
 import { AppDataSource } from "../data-source";
 import { Productos } from "../entity/Producto";
 
@@ -26,6 +26,32 @@ class ProductosController{
     }
 
     static create= async(req: Request, res:Response)=>{
+
+        try {
+
+            //destructuring
+            const{id,nombre,precio,stock,categoria}=req.body;
+
+            //validar datos
+            if(!id){
+                return res.status(400).json({message:"Debe indiciar un id del producto."});
+            }
+            if(!nombre){
+                return res.status(400).json({message:"Debe indiciar el nombre del producto."});
+            }
+            if(!precio){
+                return res.status(400).json({message:"Debe indiciar el precio del producto."});
+            }
+            if(!stock){
+                return res.status(400).json({message:"Debe indiciar el stock del producto."});
+            }
+            if(!categoria){
+                return res.status(400).json({message:"Debe indiciar la categoria del producto."});
+            }
+            
+        } catch (error) {
+            
+        }
 
         return res.status(200).json("TODO BIEN EN CREATE...");
     }
