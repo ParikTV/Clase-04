@@ -75,10 +75,12 @@ class ProductosController{
             await repoProducto.create(product);
 
         } catch (error) {
+            return res.status(400).json({message:"Error al guardar"})
+
             
         }
 
-        return res.status(200).json("TODO BIEN EN CREATE...");
+        return res.status(200).json({message:"Producto guardado correctamente"});
     }
 
 
