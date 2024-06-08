@@ -26,6 +26,7 @@ class ProductosController{
     }
 
     static create= async(req: Request, res:Response)=>{
+        const repoProducto= AppDataSource.getRepository(Productos);
 
         try {
 
@@ -48,6 +49,15 @@ class ProductosController{
             if(!categoria){
                 return res.status(400).json({message:"Debe indiciar la categoria del producto."});
             }
+
+            //reglas de negocio
+            //validar si el producto ya existe
+                const product= await repoProducto.findOne({where:{id}});
+                if(product){
+                    return res.status(400).json({message:"Ese producto ya se encuentra registrado en la base de datos "})
+                }
+                
+            
             
         } catch (error) {
             
