@@ -4,6 +4,7 @@ import ProductosController from "../controller/ProductosController";
 const routes= Router();
 
 routes.get("", ProductosController.getAll)
+routes.get("/id", ProductosController.getAll)
 routes.post("", ProductosController.create)
 
 

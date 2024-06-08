@@ -1,6 +1,7 @@
 import { Request, Response, response } from "express";
 import { AppDataSource } from "../data-source";
 import { Productos } from "../entity/Producto";
+import { json } from "stream/consumers";
 
 class ProductosController{
 
@@ -82,7 +83,24 @@ class ProductosController{
 
         return res.status(200).json({message:"Producto guardado correctamente"});
     }
+    static getOne= async(req: Request, res:Response)=>{
+      try {
+        const id= parseInt (req.params['id']);
+        //validacion de mas, por lo que vimos en clase.
+        if(!id){
+            return res.status(400).json({message:"Debe indicar el ID"})
+        }
+        const repo= AppDataSource.getRepository(Productos);
 
-
+        try {
+            const producto= await repo.findOneOrFail({where:{id}});
+            return res.status(200).json(producto)
+        } catch (error) {
+            return res.status(404).json({message:"El producto con el ID indicado no fue encontrado"})         
+        }
+ 
+      } catch (error) {
+      }
+    }
 }
 export default ProductosController;
